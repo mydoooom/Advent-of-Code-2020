@@ -202,22 +202,47 @@ const str = `1953
 
 const expenses = str.split("\n").map(expense => parseInt(expense))
 
-let digits = []
 
-for (let i = 0; i < expenses.length; i++) {
-  for (let j = 0; j < expenses.length; j++) {
-    if (expenses[i] !== expenses[j]) {
-      for (let k = 0; k < expenses.length; k++) {
-        if (expenses[j] !== expenses[k]) {
-          if (expenses[i] + expenses[j] + expenses[k] == 2020) {
-            digits.push(expenses[i])
-          }
-        } else {
-          break
+// First part
+function firstPart() {
+  let digits = []
+
+  for (let i = 0; i < expenses.length; i++) {
+    for (let j = 0; j < expenses.length; j++) {
+      if (expenses[i] !== expenses[j]) {
+        if (expenses[i] + expenses[j] == 2020) {
+          digits.push(expenses[i])
         }
       }
     }
   }
+
+  return digits.reduce( (acc, cur) => acc * cur )
 }
 
-const 
+
+// Second Part
+function secondPart() {
+  let digits = []
+
+  for (let i = 0; i < expenses.length; i++) {
+    for (let j = 0; j < expenses.length; j++) {
+      if (expenses[i] !== expenses[j]) {
+        for (let k = 0; k < expenses.length; k++) {
+          if (expenses[j] !== expenses[k]) {
+            if (expenses[i] + expenses[j] + expenses[k] == 2020) {
+              digits.push(expenses[i])
+            }
+          } else {
+            break
+          }
+        }
+      }
+    }
+  }
+
+  return digits.reduce( (acc, cur) => acc * cur )
+}
+
+
+console.log(firstPart(), secondPart())
